@@ -1,0 +1,29 @@
+.contenedor-general-como-jugar{
+    display:flex;
+    flex-direction: column;
+
+    justify-content: center;
+    text-align: center;
+
+    padding-top: 150px;;
+
+    place-items: center;
+}
+
+
+.pasos-jugar{
+    display: grid;
+    margin-top:90px;
+    width: 80%;
+   
+    justify-content: center;
+    place-items: center;
+  
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    font-family: "Poppins";
+
+
+    background-color: transparent;
+    height: fit-content;
+}

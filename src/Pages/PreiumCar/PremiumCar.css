@@ -1,0 +1,36 @@
+.card-coches{
+    display: grid;
+    width: 300px;
+    height: fit-content;
+    justify-content: center;
+    place-items: center;
+
+    background-color: rgba(101, 101, 101, 0.235);
+    border-radius: 20px;
+    padding-top: 15px;
+    padding-bottom: 10px;;
+    font-family: "Montserrat";
+    margin-bottom:20px;
+
+    cursor: pointer;
+
+    transition: 0.35s;
+}
+
+.card-coches:hover{
+    width: 310px;
+    background-color: rgba(164, 164, 164, 0.358);
+}
+
+.card-coches img{
+    width: 250px;
+    height: 113px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.textCenter{
+    margin-left:15%;
+    text-align: center;
+}

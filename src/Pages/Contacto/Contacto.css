@@ -1,0 +1,89 @@
+.container-superior-contacto{
+    padding-top: 52px;      /* MARGENES SEGURIDAD */
+     
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.container-superior-contacto h2{
+    margin-top:90px;
+}
+
+
+
+
+
+
+.card1-contacto{
+    margin-top:20px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+    
+    width:fit-content;
+    min-width:200px;
+    height: fit-content;
+    padding: 10px 30px 10px 30px;
+    background-color: rgba(167, 166, 166, 0.303);
+    border-radius: 10px;
+}
+
+.primer-elemento-contacto{
+    margin-top:10px;
+}
+
+
+.card1-contacto form h4{
+    margin-top:20px;
+}
+.card1-contacto input{
+    width: 400px;
+    border-radius: 10px;
+    padding: 5px 25px 5px 25px;
+    margin-bottom: 15px;
+}
+
+.card1-contacto input::placeholder, 
+.card1-contacto textarea::placeholder{
+   /*  padding-left:20px; */
+}
+
+
+
+
+
+.card1-contacto textarea{
+    width: 400px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 5px;
+}
+
+
+
+
+.card1-contacto button{
+    padding:5px 25px 5px 25px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: solid white;
+    color:white;
+    transition: 0.5s;
+    margin-bottom:10px;
+}
+
+.card1-contacto form button:hover{
+   background-color: white;
+   color:black;
+}
+
+.invisible{
+    display:none;
+}

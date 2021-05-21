@@ -1,0 +1,34 @@
+.card-coches-canjear{
+    display: grid;
+    width: 500px;
+    height: fit-content;
+    justify-content: center;
+    place-items: center;
+
+    background-color: rgba(101, 101, 101, 0.235);
+    border-radius: 20px;
+    padding-top: 15px;
+    padding-bottom: 10px;;
+    font-family: "Montserrat";
+    margin-bottom:20px;
+
+   transition: 0.35s;
+}
+
+.card-coches-canjear:hover{
+    width: 550px;
+    background-color: rgba(164, 164, 164, 0.358);
+}
+
+.card-coches-canjear img{
+    width: 450px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.card-coches-canjear p{
+    font-size: 20px;
+    
+}

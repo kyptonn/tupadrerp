@@ -1,0 +1,126 @@
+
+@media (max-width:1000px) {
+    .container-superior-perfil{ 
+        padding-top: 52px;      /* MARGENES SEGURIDAD */
+        padding-left: 150px;    /* MARGENES SEGURIDAD */
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+}
+
+@media (min-width:1000px) {
+    .container-superior-perfil{
+        padding-top: 52px;      /* MARGENES SEGURIDAD */
+        padding-left:15%;       /* MARGENES SEGURIDAD */
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+       
+    }
+
+}
+
+
+
+
+
+/* CARD 1 */
+.card1-perfil{
+    margin-top:20px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+    
+    width:30%;
+    min-width:200px;
+    height: fit-content;
+    padding: 10px 10px 10px 10px;
+    background-color: rgba(167, 166, 166, 0.303);
+    border-radius: 10px;
+  
+}
+
+.card1-perfil h1{
+    margin-top: 10px;
+}
+
+.card1-perfil h6{
+    font-size: 12px;
+}
+
+
+.circulo-avatar-perfil{
+    width: 150px;
+    height: 150px;
+}
+
+
+.imagen-avatar-perfil{
+    margin-top:10px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.card1-perfil a{
+    text-decoration: none;
+    color:rgb(144, 144, 255);
+
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.card1-perfil textarea{
+    width: 400px;
+}
+
+.card1-perfil form h4{
+    margin-top:20px;
+}
+
+
+
+
+
+/* CARD 2 */
+.card2-perfil{
+    margin-top:20px;
+    
+
+    width:70%;
+    min-width:200px;
+    height: fit-content;
+    padding: 20px 20px 20px 20px;
+    background-color: rgba(167, 166, 166, 0.303);
+    border-radius: 10px;
+}
+
+.card2-perfil h3{
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.card2-perfil h3 a{
+    text-decoration: none;
+    color:rgb(144, 144, 255);
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+

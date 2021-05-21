@@ -1,0 +1,99 @@
+@media (max-width:1000px){
+    .card2-comprar{
+        margin-top:20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        text-align: center;
+    
+        width:40%;
+        min-width:200px;
+        height: fit-content;
+    
+        padding: 20px 20px 20px 20px;
+        background-color: rgba(167, 166, 166, 0.303);
+        border-radius: 10px;
+    }
+
+
+}
+
+
+
+
+
+@media (min-width:1000px){
+    .card2-comprar{
+        margin-top:20px;
+        display: flex;
+        justify-content: space-around;
+    
+        width:40%;
+        min-width:200px;
+        height: fit-content;
+        align-items: center;
+        padding: 20px 20px 20px 20px;
+        background-color: rgba(167, 166, 166, 0.303);
+        border-radius: 10px;
+    }
+
+
+}
+
+
+.card2-comprar img{
+    width: 200px;
+}
+
+.card3-comprar{
+    margin-top:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width:70%;
+    min-width:200px;
+    height: fit-content;
+  
+    padding: 20px 20px 20px 20px;
+    background-color: rgba(167, 166, 166, 0.303);
+    border-radius: 10px;
+}
+
+
+.card3-comprar input{
+    margin-top:20px;
+}
+
+
+.card3-comprar h5{
+    margin-top: 10px;
+    font-size: 15px;
+    color:rgb(143, 143, 255);
+}
+
+
+ .hola button{
+    margin-top:10px;
+}
+
+
+.card3-comprar button{
+    margin-top:10px;
+   
+}
+
+
+.terminos a{
+    color:blue;
+}
+
+
+.card3-comprar button a{
+    color:black;
+}
+
+.hide{
+    display:none;
+}
