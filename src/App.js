@@ -27,6 +27,8 @@ import CustomCar from './Pages/CustomCar/CustomCar';
 import Tuneofull from './Pages/Tuneofull/Tuneofull';
 import Eventos from './Pages/Eventos/Eventos';
 import CambiarAvatar from './Pages/CambiarAvatar/CambiarAvatar';
+import PrivateRoute from './Components/PrivateRoute';
+import ForgotPassword from './Pages/ForgetPassword';
 
 
 //Pages
@@ -57,10 +59,11 @@ function App() {
 
           <Route exact path="/login" component={Login}/>
           <Route exact path="/registro" component={Singup}/>
+          <Route exact path="/recuperar-contrasena" component={ForgotPassword}/>
 
           <Route exact path="/panel" component={Panel}/>
           <Route exact path="/panel/perfil" component={Perfil}/>
-          <Route exact path="/panel/donaciones" component={Donaciones}/>
+          <PrivateRoute exact path="/panel/donaciones" component={Donaciones}/>
           <Route exact path="/panel/comprar-coins" component={Coins}/>
           <Route exact path="/panel/comprar-coins-pago" component={Pago}/>
 

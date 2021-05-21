@@ -44,13 +44,13 @@ export default function Home() {
                             <a href="https://discord.gg/ttAWeYA3bq"> <i class="fab fa-discord"></i></a>
                             </div>
 
-                            <div className="youtube">
+                            {/* <div className="youtube">
                             <a href="https://youtube.com"> <i class="fab fa-youtube"></i></a>
                             </div>
 
                             <div className="twitter">
                                 <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>

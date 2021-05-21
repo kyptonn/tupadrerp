@@ -80,7 +80,7 @@ class Login extends Component {
 
                     <br></br>
 
-                    <p><Link to="/forgot-password"> ¿Has olvidado la contraseña?</Link></p>
+                    <p><Link to="/recuperar-contrasena"> ¿Has olvidado la contraseña?</Link></p>
                     <p><Link to="/registro">¿Aún no tienes cuenta?</Link></p>
                     
                 </div>
