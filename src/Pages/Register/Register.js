@@ -86,6 +86,7 @@ class Singup extends Component {
                 <p><Link to="/login"> ¿Ya tienes una cuenta?</Link></p>
                 </div>
                 </form>
+                <br></br>
             </div>
 
         </>
