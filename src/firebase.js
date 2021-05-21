@@ -44,6 +44,7 @@ export const createUserDocument = async (user, additionalData) => {
         usuario: user.uid,
         donador: "no",
         terminosConfirmados:"no",
+        nombrePersonaje: null,
         coins:0,
 
         

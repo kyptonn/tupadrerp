@@ -50,41 +50,49 @@ export default function CustomCar() {
 
 
     const [enlace, setEnlace] = useState()
-
+    const [nombre, setNombre] = useState(null)
 
     const canjear = async () => {
+        if(nombre == null){
+            alert('Introduce el Nombre del Personaje')
+        }else{
 
-        // MIRAMOS CUANTAS MONEDAS TIENE
-        let moendasUsuario = await db.firestore().collection('users').doc(usuarioID).get()
-        console.log(moendasUsuario.data())
 
-        let datosTMP = moendasUsuario.data()
-        let monedasBefore = datosTMP.coins
-
-        let monedasAfter = monedasBefore - costeCocheCustom
-
-        console.log(monedasAfter)
-
-        // QUITAMOS MONEDAS (CANJEAMOS)
-        await db.firestore().collection('users').doc(usuarioID).update({
-            coins: monedasAfter
-        })
-   
-        // ENVIAR EMAIL
-        var templateParams= {
-            from_name:`${usuarioID}`,
-            email : `${user.email}`,
-            subject:`${usuarioID} ha canjeado Coche Custom: ${enlace}`,
-            message:`${usuarioID} ha canjeado Coche Custom: ${enlace}`    
-        };
+            // MIRAMOS CUANTAS MONEDAS TIENE
+            let moendasUsuario = await db.firestore().collection('users').doc(usuarioID).get()
+            console.log(moendasUsuario.data())
+    
+            let datosTMP = moendasUsuario.data()
+            let monedasBefore = datosTMP.coins
+    
+            let monedasAfter = monedasBefore - costeCocheCustom
+    
+            console.log(monedasAfter)
+    
+            // QUITAMOS MONEDAS (CANJEAMOS)
+            await db.firestore().collection('users').doc(usuarioID).update({
+                coins: monedasAfter,
+                nombrePersonaje: nombre
+            })
+       
+            // ENVIAR EMAIL
+            var templateParams= {
+                from_name:`${usuarioID}`,
+                email : `${user.email}`,
+                subject:`${usuarioID} ha canjeado Coche Custom: ${enlace}`,
+                message:`${usuarioID} ha canjeado Coche Custom: ${enlace}`    
+            };
+                
+            await emailjs.send( sk.sk[0].service, sk.sk[0].template, templateParams, sk.sk[0].user )
+            .then((res) => {
+                console.log("success", res.status);
+                alert('RPKoins Canjeados!')
+                history.push('/');
+            });
             
-        await emailjs.send( sk.sk[0].service, sk.sk[0].template, templateParams, sk.sk[0].user )
-        .then((res) => {
-            console.log("success", res.status);
-            alert('RPKoins Canjeados!')
-            history.push('/');
-        });
-        
+
+        }
+
 
     }
 
@@ -128,6 +136,10 @@ export default function CustomCar() {
                     <br></br>
                     <br></br>
                     <input placeholder="   Introduce el enlace"  onChange={(e) => setEnlace(e.target.value)} style={{width:'400px'}}></input>
+                    <br></br>
+                    <br></br>
+                    <h4>Introduce el nombre de tu Personaje</h4>
+                    <input placeholder="   Introduce el nombre de tu Personaje"  onChange={(e) => setNombre(e.target.value)} style={{width:'400px'}}></input>
                     <br></br>
 
                     {datosUsuario.coins < 30 ?

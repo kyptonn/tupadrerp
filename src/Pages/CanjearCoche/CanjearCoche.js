@@ -10,6 +10,7 @@ import sk from '../../sk.json'
 
 import firebase from '../../firebase'
 import db from '../../firebase'
+import Loader from 'react-spinners/BarLoader'
 
 
 
@@ -18,7 +19,7 @@ export default function CanjearCoche() {
     const [loading1, setLoading1] = useState(true)
     const [loading2, setLoading2] = useState(true)
     const [datosUsuario, setDatosUsuario] = useState(true)
-
+    const [nombre, setNombre] = useState(null)
     let history = useHistory();
    
     var nombreMoneda = 'RPKoins'
@@ -92,41 +93,48 @@ export default function CanjearCoche() {
 
     const canjear = async () => {
 
-        // MIRAMOS CUANTAS MONEDAS TIENE
-        let moendasUsuario = await db.firestore().collection('users').doc(usuarioID).get()
-        console.log(moendasUsuario.data())
-
-        let datosTMP = moendasUsuario.data()
-        let monedasBefore = datosTMP.coins
-
-        let monedasAfter = monedasBefore - costeCochePremium
-
-        console.log(monedasAfter)
-
-        // QUITAMOS MONEDAS (CANJEAMOS)
-        await db.firestore().collection('users').doc(usuarioID).update({
-            coins: monedasAfter
-        })
-   
-        // ENVIAR EMAIL
-        var templateParams= {
-            from_name:`${usuarioID}`,
-            email : `${user.email}`,
-            subject:`${usuarioID} ha canjeado Coche Premium: ${selectedCar.nombre}`,
-            message:`${usuarioID} ha canjeado Coche Premium: ${selectedCar.nombre}`    
-        };
+        if(nombre == null){
+            alert('Introduce el Nombre del Personaje')
+        }else{
+            // MIRAMOS CUANTAS MONEDAS TIENE
+            let moendasUsuario = await db.firestore().collection('users').doc(usuarioID).get()
+            console.log(moendasUsuario.data())
+    
+            let datosTMP = moendasUsuario.data()
+            let monedasBefore = datosTMP.coins
+    
+            let monedasAfter = monedasBefore - costeCochePremium
+    
+            console.log(monedasAfter)
+    
+            // QUITAMOS MONEDAS (CANJEAMOS)
+            await db.firestore().collection('users').doc(usuarioID).update({
+                coins: monedasAfter,
+                nombrePersonaje: nombre
+            })
+       
+            // ENVIAR EMAIL
+            var templateParams= {
+                from_name:`${usuarioID}`,
+                email : `${user.email}`,
+                subject:`${usuarioID} ha canjeado Coche Premium: ${selectedCar.nombre}. Nombre del Personaje: ${nombre}`,
+                message:`${usuarioID} ha canjeado Coche Premium: ${selectedCar.nombre}. Nombre del Personaje: ${nombre}`    
+            };
+                
+            await emailjs.send( sk.sk[0].service, sk.sk[0].template, templateParams, sk.sk[0].user )
+            .then((res) => {
+                console.log("success", res.status);
+                alert('RPKoins Canjeados!')
+                history.push('/');
+            });
             
-        await emailjs.send( sk.sk[0].service, sk.sk[0].template, templateParams, sk.sk[0].user )
-        .then((res) => {
-            console.log("success", res.status);
-            alert('RPKoins Canjeados!')
-            history.push('/');
-        });
-        
+
+        }
+
 
     }
         
-
+    
 
 
    
@@ -134,12 +142,25 @@ export default function CanjearCoche() {
 
     if(loading1){
         return (
-            <>
-            <h1>hola</h1>
-            {/* {getCoche()} */}
-            </>
-            )
-    } 
+            <div className="overflow-x-disabled">
+                <Navigationbar/>
+                <MenuPanel/>
+                <div className="fondo-general-donaciones">
+                <div className="contenedor-general-panel">
+
+                    <div style={{marginLeft:'15%',display:'flex',justifyContent:'center'}}>
+                    <Loader type="Oval" color="#00BFFF" height={80} width={80} />
+                    </div>
+
+
+                </div>
+                </div>
+
+
+            </div>
+
+        )
+    }
 
 
 
@@ -169,8 +190,12 @@ export default function CanjearCoche() {
                         <br></br>
                         <h3><strong>20 RPKoins</strong></h3>
                         <br></br>
-
+                        <h4>Introduce el Nombre del Personaje</h4>
+                        <input placeholder='   Introduce el nombre de tu Personaje' onChange={(e) => {setNombre(e.target.value)}} style={{width:'300px'}}/>
+                        <br></br>
+                        <br></br>
                         {datosUsuario.coins < 20 ?
+                            
                             <button onClick={() => alertaCoins()} className="btn btn-warning">Canjear</button>
                             :
                             <button onClick={() => canjear()} className="btn btn-warning">Canjear</button>

@@ -35,7 +35,8 @@ export default function Tuneofull() {
 
     const [datosUsuario, setDatosUsuario] = useState()
     const [loading1, setLoading1] = useState(true)
-
+    const [nombre, setNombre] = useState(null)
+    const[loadingFinal, setLoadingFinal] = useState(false)
     useEffect(() =>  {
 
         const getUser= async() =>  {
@@ -50,42 +51,55 @@ export default function Tuneofull() {
     },[])
 
     const canjear = async () => {
+        if(nombre == null){
+            alert('Introduce el Nombre del Personaje')
+            setLoadingFinal(false)
+        }else{
+            // MIRAMOS CUANTAS MONEDAS TIENE
+            let moendasUsuario = await db.firestore().collection('users').doc(usuarioID).get()
+            console.log(moendasUsuario.data())
 
-        // MIRAMOS CUANTAS MONEDAS TIENE
-        let moendasUsuario = await db.firestore().collection('users').doc(usuarioID).get()
-        console.log(moendasUsuario.data())
+            let datosTMP = moendasUsuario.data()
+            let monedasBefore = datosTMP.coins
 
-        let datosTMP = moendasUsuario.data()
-        let monedasBefore = datosTMP.coins
+            let monedasAfter = monedasBefore - costeTuneoFull
 
-        let monedasAfter = monedasBefore - costeTuneoFull
+            console.log(monedasAfter)
 
-        console.log(monedasAfter)
+            // QUITAMOS MONEDAS (CANJEAMOS)
+            await db.firestore().collection('users').doc(usuarioID).update({
+                coins: monedasAfter,
+                nombrePersonaje: nombre
+            })
 
-        // QUITAMOS MONEDAS (CANJEAMOS)
-        await db.firestore().collection('users').doc(usuarioID).update({
-            coins: monedasAfter
-        })
-   
-        // ENVIAR EMAIL
-        var templateParams= {
-            from_name:`${usuarioID}`,
-            email : `${user.email}`,
-            subject:`${usuarioID} ha canjeado Tuneo Full`,
-            message:`${usuarioID} ha canjeado Tuneo Full`    
-        };
-            
-        await emailjs.send( sk.sk[0].service, sk.sk[0].template, templateParams, sk.sk[0].user )
-        .then((res) => {
-            console.log("success", res.status);
-            alert('RPKoins Canjeados!')
-            history.push('/');
-        });
+            // ENVIAR EMAIL
+            var templateParams= {
+                from_name:`${usuarioID}`,
+                email : `${user.email}`,
+                subject:`${usuarioID} ha canjeado Tuneo Full (${nombre})`,
+                message:`${usuarioID} ha canjeado Tuneo Full (${nombre})`    
+            };
+                
+            await emailjs.send( sk.sk[0].service, sk.sk[0].template, templateParams, sk.sk[0].user )
+            .then((res) => {
+                console.log("success", res.status);
+                alert('RPKoins Canjeados!')
+                history.push('/');
+            });
+            setLoadingFinal(false)
+        }
+        
     }
 
 
     const alertaCoins = () =>{
         alert(`No tienes suficientes RPKoins. Actualmente tienes ${datosUsuario.coins} RPKoins`)
+    }
+    const LoaderFinal = () => {
+        if(loadingFinal === true){
+            return  <Loader type="Oval" color="#00BFFF" height={80} width={80} />
+            
+        } else return <></>
     } 
 
     if(loading1){
@@ -129,14 +143,16 @@ export default function Tuneofull() {
                             puedes canjear tus puntos por un Tuneo Full.
                         </h5>
                         <br></br>
-                      
+                        <input placeholder="   Introduce el nombre de tu Personaje"  onChange={(e) => setNombre(e.target.value)} style={{width:'400px'}}></input>
+                        <br></br>
                         <br></br>
                         {datosUsuario.coins < 12 ?
                             <button onClick={() => alertaCoins()} className="btn btn-warning">Canjear</button>
                         :
-                            <button onClick={() => canjear()} className="btn btn-warning">Canjear</button>
+                            <button onClick={() => {setLoadingFinal(true);canjear();}} className="btn btn-warning">Canjear</button>
                         }
                         <h5 className="mt-3">12 RPKoins</h5>
+                        <LoaderFinal/>
                     </div>
                 </div>
             </div>
